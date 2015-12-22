@@ -292,7 +292,7 @@
         "{{if eq (user `chef_client`) `true` }}scripts/common/chef-client.sh{{else}}scripts/common/dummy.sh{{end}}",
         "scripts/common/sudoers.sh",
         "scripts/vagrant/grub.sh",
-        "scripts/common/clean-up.sh",
+        "scripts/ubuntu/clean-up.sh",
         "scripts/vagrant/minimize.sh"
       ]
     },
@@ -333,7 +333,7 @@
             "{{if eq (user `chef_client`) `true` }}scripts/common/chef-client.sh{{else}}scripts/common/dummy.sh{{end}}",
             "scripts/common/docker.sh",
             "scripts/common/awscli.sh",
-            "scripts/common/clean-up.sh",
+            "scripts/ubuntu/clean-up.sh",
             "scripts/common/sudoers.sh",
             "scripts/ec2/grub.sh"
           ]
@@ -354,7 +354,7 @@
             "scripts/common/python-pip.sh",
             "{{if eq (user `chef_client`) `true` }}scripts/common/chef-client.sh{{else}}scripts/common/dummy.sh{{end}}",
             "scripts/common/awscli.sh",
-            "scripts/common/clean-up.sh",
+            "scripts/ubuntu/clean-up.sh",
             "scripts/common/sudoers.sh",
             "scripts/ec2/grub.sh"
           ]

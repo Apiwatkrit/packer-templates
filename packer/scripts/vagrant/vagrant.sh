@@ -18,6 +18,10 @@ EOF
 chown -R root:root /etc/sudoers.d
 chmod 0440 /etc/sudoers.d/vagrant
 
+# Make sure that the Vagrant user is also a member
+# of the "users" group.
+usermod -aG users vagrant
+
 mkdir -p /home/vagrant/.ssh
 
 if [[ ! -f ${VAGRANT_FILES}/vagrant.pub ]]; then

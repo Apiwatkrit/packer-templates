@@ -87,15 +87,14 @@
     {
       "type": "shell",
       "environment_vars": [
-        "ARCHIVE_MIRROR=http://{{user `archive_mirror`}}/ubuntu",
         "BUILD_NUMBER={{user `build_number`}}",
         "PACKER_BUILD_NAME={{user `name`}}",
         "PACKER_BUILD_TIMESTAMP={{timestamp}}",
-        "PACKER_BUILD_VERSION={{user `version`}}",
-        "CHEF_CLIENT_VERSION={{user `chef_client_version`}}"
+        "PACKER_BUILD_VERSION={{user `version`}}"
       ],
       "execute_command": "echo 'vagrant' | {{ .Vars }} sudo -H -S -E bash '{{ .Path }}'",
       "scripts": [
+        "scripts/centos/update.sh",
         "scripts/common/reboot.sh",
         "scripts/vagrant/vagrant.sh",
         "scripts/centos/clean-up.sh",

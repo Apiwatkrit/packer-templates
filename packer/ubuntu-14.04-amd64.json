@@ -277,7 +277,7 @@
       "execute_command": "echo 'vagrant' | {{ .Vars }} sudo -H -S -E bash '{{ .Path }}'",
       "scripts": [
         "scripts/vagrant/hostname.sh",
-        "scripts/common/update.sh",
+        "scripts/ubuntu/update.sh",
         "scripts/common/packages.sh",
         "scripts/vagrant/packages.sh",
         "scripts/common/sshd.sh",

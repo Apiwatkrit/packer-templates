@@ -16,7 +16,7 @@ logrotate -f /etc/logrotate.conf || true
 # Remove old Kernel images that are not the current one.
 rpm -q --whatprovides kernel | grep -Fv $(uname -r) | \
     xargs -I'{}' bash -c \
-        "if rpm -q '{}' &>/dev/null; then yum -y remove '{}' || true fi"
+        "if rpm -q '{}' &>/dev/null; then yum -y remove '{}' || true; fi"
 
 GROUPS_TO_PURGE=(
     'Editors'
@@ -40,16 +40,16 @@ PACKAGES_TO_PURGE=(
     man man-db
 )
 
-for g in ${GROUPS_TO_PURGE[@]}; do
-    yum -y groupremove $g 2> /dev/null || true
+for group in "${GROUPS_TO_PURGE[@]}"; do
+    yum -y groupremove "'$group'" 2> /dev/null || true
 done
 
-for p in ${PACKAGES_TO_PURGE[@]}; do
-    yum -y remove $p 2> /dev/null || true
+for package in "${PACKAGES_TO_PURGE[@]}"; do
+    yum -y remove "'$package'" 2> /dev/null || true
 done
 
-for o in 'clean all' 'history new'; do
-    yum -y --enablerepo='*' $o
+for option in 'clean all' 'history new'; do
+    yum -y --enablerepo='*' $option
 done
 
 rpmdb --rebuilddb
@@ -138,16 +138,11 @@ rm -f /etc/udev/rules.d/70-persistent-net.rules \
       /etc/udev/rules.d/80-net-name-slot.rules \
       /lib/udev/rules.d/75-persistent-net-generator.rules
 
-mkdir /etc/udev/rules.d/70-persistent-net.rules \
-      /etc/udev/rules.d/80-net-name-slot.rules
+ln -sf /dev/null \
+       /etc/udev/rules.d/70-persistent-net.rules
 
-chown root:root \
-    /etc/udev/rules.d/70-persistent-net.rules \
-    /etc/udev/rules.d/80-net-name-slot.rules
-
-chmod 755 \
-    /etc/udev/rules.d/70-persistent-net.rules \
-    /etc/udev/rules.d/80-net-name-slot.rules
+ln -sf /dev/null \
+       /etc/udev/rules.d/80-net-name-slot.rules
 
 rm -rf /dev/.udev \
        /var/lib/{dhcp,dhcp3}/* \

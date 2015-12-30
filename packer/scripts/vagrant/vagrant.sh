@@ -29,7 +29,8 @@ if [[ ! -f ${VAGRANT_FILES}/vagrant.pub ]]; then
         https://raw.githubusercontent.com/mitchellh/vagrant/master/keys/vagrant.pub
 fi
 
-cp -f ${VAGRANT_FILES}/vagrant.pub /home/vagrant/.ssh/authorized_keys
+cp -f ${VAGRANT_FILES}/vagrant.pub \
+      /home/vagrant/.ssh/authorized_keys
 
 chown -R vagrant:vagrant /home/vagrant/.ssh
 chmod 700 /home/vagrant/.ssh
